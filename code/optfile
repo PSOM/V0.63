@@ -27,6 +27,7 @@ define_gotm=T
 
 # define_parallel=T|F compiles PSOM with openmp|non-openmp flags.
 define_parallel=T
+# (note: only available with ifort)
 
 # define_debug=T|F compiles PSOM with|without debugging options.
 # Debug option is available with define_parallel=F.
