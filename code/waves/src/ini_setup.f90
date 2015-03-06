@@ -48,7 +48,7 @@ SUBROUTINE ini_setup(pcorr)
    Fy=tanh((dble(j)-dble(150))/dble(100)*2.d0*PI)
    dyM(j)=(Fy-3.d0)/(-4.d0)*dy
  ENDDO
- DO j=NJ/2+1,NJ+2
+ DO j=NJ/2+1,NJ+1
    Fy=tanh((dble(j)-dble(NJ-150))/dble(100)*2.d0*PI)
    dyM(j)=(Fy+3.d0)/(4.d0)*dy
  ENDDO
