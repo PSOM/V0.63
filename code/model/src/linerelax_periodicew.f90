@@ -30,7 +30,7 @@ do j=1,nym
   !write(6,"(a,i3,a,i2,a,i2)") " OpenMP: j = ",j," thread number:",OMP_GET_THREAD_NUM()," / ",OMP_GET_NUM_THREADS()
   
   #ifdef parallel
-    istart=NI/2
+    istart=0
   #else
     istart = int(ran3(iseed)*(nxm+1))
   #endif
