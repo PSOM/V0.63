@@ -1,4 +1,4 @@
-V0.5 - 2013/03/06.
+V0.63.0 - 2013/03/06.
 
 *********************
 * GENERAL DESCRIPTION
@@ -15,7 +15,7 @@ The model has been used for a number of process studies, including investigation
 * DIRECTIONS TO INSTALL THE MODEL
 
 - Download the code by clicking on "ZIP" just to the left of the repository URL field.
-- Once the file is dowloaded, unzip it: a directory, with a name like " V0.5-master ", should be created.
+- Once the file is dowloaded, unzip it: a directory, with a name like " V0.63.0-master ", should be created.
 - You can move this directory anywhere you like.
-- Go to this " V0.5-master/code " directory and follow the instructions detailed in the file " GET_STARTED_1 ".
+- Go to this " V0.63.0-master/code " directory and follow the instructions detailed in the file " GET_STARTED_1 ".
 
