@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt-get update
+RUN apt-get install -y wget
 RUN apt-get install -y curl 
 RUN apt-get install -y bash 
 RUN apt-get install -y grep
@@ -11,7 +12,7 @@ RUN apt-get install -y gfortran
 RUN apt-get install -y vim
 RUN apt-get install -y libnetcdf-dev libnetcdff-dev
 COPY ./install_netcdf.sh /tmp/install_netcdf.sh
-RUN /tmp/install_netcdf/install_netcdf.sh
+RUN /tmp/install_netcdf.sh
 
 # Add GOTM Dependendicies
 RUN apt-get install -y cmake
