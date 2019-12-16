@@ -6,7 +6,7 @@
 
 !---------- TIME SETTING ------------------------
 
-nsteps=4000,              ! number of time steps
+nsteps=5,              ! number of time steps
 dtime_dim=432d0,           ! time step (in sec)
 
 !----------  HYDROSTATIC ------------------------
