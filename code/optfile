@@ -32,7 +32,7 @@ define_parallel=F
 # define_debug=T|F compiles PSOM with|without debugging options.
 # Debug option is available with define_parallel=F.
 # (note: debugging with gfortran results in better error explanations than with ifort)
-define_debug=T
+define_debug=F
 
 #
 ###########################################################
@@ -56,7 +56,7 @@ netcdf_lnk_flag=-lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnet
 #gotm_dir_lib=-L/Users/mclaret/PSOM/gotm-4.0.0/lib/IFORT/ -lturbulence_prod -lutil_prod -lmeanflow_prod
 #gotm_dir_inc= -I/Users/mclaret/PSOM/gotm-4.0.0/modules/IFORT
 ## DON'T change this since the dir of gotm is based on the container and will never change
-gotm_dir_lib=-L/root/local/gotm/gfortran/lib -lturbulence -lutil -lairsea -lconfig -lfield_manager
+gotm_dir_lib=-L/root/local/gotm/gfortran/lib -lturbulence -lutil -lfield_manager -lyaml
 gotm_dir_inc=-I/root/local/gotm/gfortran/include
 
 
