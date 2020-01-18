@@ -17,10 +17,10 @@ subroutine heat_flux(Tdif,step)
 
   integer NT
   parameter (NT = 1897)
-  REAL(kind=rc_kind) :: ncsw(NT), nchours(NT)
+  REAL(kind=rc_kind) :: swnc(NT), qlossnc(NT), nchours(NT)
   REAL(kind=rc_kind) :: bi(NT), ci(NT), di(NT)
 
-  REAL(kind=rc_kind) :: swrtemp,seval
+  REAL(kind=rc_kind) :: swtemp,qlosstemp,seval
   REAL(kind=rc_kind) :: fac, Kdfluxdzt, Kdfluxdzb, Kdfluxdzz(NK), swrd(NK)
   REAL(kind=rc_kind) :: Tdif(NI,NJ,NK)
 
@@ -32,10 +32,16 @@ subroutine heat_flux(Tdif,step)
   retval = nf_open(TRIM(dirin)//'input.nc', NF_NOWRITE, ncid)
 
 !Get the varid of the data variable, based on its name.
-  retval = nf_inq_varid(ncid, 'Q', varid)
+  retval = nf_inq_varid(ncid, 'swr', varid)
 
 !Read the data.
-  retval = nf_get_var_double(ncid, varid, ncsw)
+  retval = nf_get_var_double(ncid, varid, swnc)
+
+!Get the varid of the data variable, based on its name.
+  retval = nf_inq_varid(ncid, 'qloss', varid)
+
+!Read the data.
+  retval = nf_get_var_double(ncid, varid, qlossnc)
 
 !Get the varid of the data variable, based on its name.
   retval = nf_inq_varid(ncid, 'time', varid)
@@ -45,10 +51,13 @@ subroutine heat_flux(Tdif,step)
 
 !Interpolating the data for the current time step
 
-  call spline(NT, nchours, ncsw, bi, ci, di)
-  swrtemp = seval(NT, (step*dtime_dim)/(60d0*60d0), nchours, ncsw, bi, ci, di)
+  call spline(NT, nchours, swnc, bi, ci, di)
+  swtemp = seval(NT, (step*dtime_dim)/(60d0*60d0), nchours, swnc, bi, ci, di)
 
-  print*, 'SWR = ', swrtemp
+  call spline(NT, nchours, qlossnc, bi, ci, di)
+  qlosstemp = seval(NT, (step*dtime_dim)/(60d0*60d0), nchours, qlossnc, bi, ci, di)
+
+  print*, 'swr,qloss = ', swtemp,qlosstemp
 
 ! ----------------------------------
 
@@ -62,13 +71,13 @@ subroutine heat_flux(Tdif,step)
   swr = 0.d0
   qloss = 0.d0
 
-  swr  (:) = swrtemp
-  qloss(:) = 0d0/3.14159
+  swr  (:) = swtemp
+  qloss(:) = qlosstemp
 
 
   OPEN (unit=200,file=TRIM(dirout)//'swr.out')                                                  
            WRITE(200,*) swr
-           OPEN (unit=300,file=TRIM(dirout)//'cool.out')                                                   
+  OPEN (unit=300,file=TRIM(dirout)//'cool.out')                                                   
            WRITE(300,*) qloss
 
 ! ----------------------------------
@@ -88,7 +97,7 @@ subroutine heat_flux(Tdif,step)
       Tdif(i,j,NK) =fac*Jac(i,j,NK)*wz(i,j,NK)*Kdfluxdzt
 
       do k=2,NK-1
-        Tdif(i,j,k)=fac*Jac(i,j, k)*wz(i,j, k)*(Kdfluxdzz(k) - Kdfluxdzz(k-1))
+        Tdif(i,j,k) =fac*Jac(i,j, k)*wz(i,j, k)*(Kdfluxdzz(k) - Kdfluxdzz(k-1))
       end do
       Tdif(i,j, 1) =fac*Jac(i,j, 1)*wz(i,j, 1)*Kdfluxdzb
 
