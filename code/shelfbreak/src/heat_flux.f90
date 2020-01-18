@@ -9,9 +9,46 @@ subroutine heat_flux(Tdif,step)
   implicit none 
 
   INTEGER :: i,j,k,step
-  REAL(kind=rc_kind) :: swrtemp
+
+  !This will be the netCDF ID for the file and data variable.
+  integer ncid, varid
+  !Loop indexes, and error handling.
+  integer ti, retval
+
+  integer NT
+  parameter (NT = 1897)
+  REAL(kind=rc_kind) :: ncsw(NT), nchours(NT)
+  REAL(kind=rc_kind) :: bi(NT), ci(NT), di(NT)
+
+  REAL(kind=rc_kind) :: swrtemp,seval
   REAL(kind=rc_kind) :: fac, Kdfluxdzt, Kdfluxdzb, Kdfluxdzz(NK), swrd(NK)
   REAL(kind=rc_kind) :: Tdif(NI,NJ,NK)
+
+#include "netcdf.inc"
+! ----------------------------------
+  
+!Open the file. 
+!NF_NOWRITE tells netCDF we want read-only access to the file.
+  retval = nf_open(TRIM(dirin)//'input.nc', NF_NOWRITE, ncid)
+
+!Get the varid of the data variable, based on its name.
+  retval = nf_inq_varid(ncid, 'Q', varid)
+
+!Read the data.
+  retval = nf_get_var_double(ncid, varid, ncsw)
+
+!Get the varid of the data variable, based on its name.
+  retval = nf_inq_varid(ncid, 'time', varid)
+
+!Read the data.
+  retval = nf_get_var_double(ncid, varid, nchours)
+
+!Interpolating the data for the current time step
+
+  call spline(NT, nchours, ncsw, bi, ci, di)
+  swrtemp = seval(NT, (step*dtime_dim)/(60d0*60d0), nchours, ncsw, bi, ci, di)
+
+  print*, 'SWR = ', swrtemp
 
 ! ----------------------------------
 
@@ -25,18 +62,14 @@ subroutine heat_flux(Tdif,step)
   swr = 0.d0
   qloss = 0.d0
 
-! Add sinusoidal heat flux
-  swrtemp = 0d0*sin( (2*3.14159d0/(24*3600))*step*dtf*(1.d05)    )
-  if (swrtemp.lt.(0.d0)) then
-    swrtemp = 0.d0
-  endif
-
-  !swr  (:) = swrtemp
-  do j=1,NJ
-    swr  (j) = 900.d0*sin(dble(j-1)/dble(NJ-1)*pi/2)
-  enddo
+  swr  (:) = swrtemp
   qloss(:) = 0d0/3.14159
-  swr(:)=0.d0
+
+
+  OPEN (unit=200,file=TRIM(dirout)//'swr.out')                                                  
+           WRITE(200,*) swr
+           OPEN (unit=300,file=TRIM(dirout)//'cool.out')                                                   
+           WRITE(300,*) qloss
 
 ! ----------------------------------
 

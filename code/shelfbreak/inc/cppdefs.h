@@ -1,7 +1,7 @@
 #undef  runtracmass
 #define periodic_ew
 #undef  periodic_ns
-#define allow_particle
+#undef allow_particle
 #define rhoonly
 #undef  relaxation
 #define fixed_bottom_thickness

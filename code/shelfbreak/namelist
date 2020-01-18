@@ -6,12 +6,12 @@
 
 !---------- TIME SETTING ------------------------
 
-nsteps=5,              ! number of time steps
-dtime_dim=432d0,           ! time step (in sec)
+nsteps=100,              ! number of time steps
+dtime_dim=864d0,           ! time step (in sec)
 
 !----------  HYDROSTATIC ------------------------
 
-fnhhy=1.0d0,               ! 1 if simulation is non-hydrostatic, 0 otherwise
+fnhhy=0.0d0,               ! 1 if simulation is non-hydrostatic, 0 otherwise
 
 !--- PLANETARY VORTICITY ------------------------
 
@@ -37,13 +37,17 @@ Kx=1d0,                   ! diffusion in the horizontal, x direction (in m*m/s)
 Ky=1d0,                   ! diffusion in the horizontal, y direction (in m*m/s)
 RR=0d0,                    ! bottom friction (in m/s) 
 
+!--------  INPUT SETTING -----------------------
+
+dirin="./../input/shelfbreak/"
+
 !--------  OUTPUT SETTING -----------------------
 
 out1d_int=20000,           ! frequency of the 1D output (in number of timesteps)
 out2d_int=50,              ! frequency of the 2D output (in number of timesteps)
 out3d_int=4000,            ! frequency of the 3D output (in number of timesteps)
 
-dirout="./../output/"
+dirout="./../output/shelfbreak/"
                            ! output directory
 
 

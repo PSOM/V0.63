@@ -13,7 +13,7 @@ INTEGER, PARAMETER :: ntr = 1, nconsume = 1
 !  INTEGER, PARAMETER                 :: NI=96 ,NJ=96 ,NK=64,ngrid=4,maxout=732992 , maxint=673920, int1=589824
 !  INTEGER,PARAMETER                  :: NI=96, NJ=192,NK=24,ngrid=4,maxout=575132,  maxint=505440, int1=442368
 
- INTEGER,PARAMETER                  :: NI=96, NJ=192,NK=32,ngrid=5,maxout=750240,  maxint=674064, int1=589824
+ INTEGER,PARAMETER                  :: NI=5, NJ=20,NK=32,ngrid=5,maxout=750240,  maxint=674064, int1=589824
 !INTEGER, PARAMETER                   :: NI=48, NJ=192,NK=32,ngrid=5,maxout=384192,  maxint=337032, int1=294912
 
 !  INTEGER,PARAMETER                  :: NI=96, NJ=192,NK=64,ngrid=6, maxout=1449264,maxint=1348164,int1=1179648
