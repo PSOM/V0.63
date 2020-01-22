@@ -15,6 +15,6 @@
     ! NI, NJ, NK: dimensions of the model grid.
     ! ngrid, maxout, maxint,int1: key parameters for the computation of the nonhydrostatic pressure.
 
-    INTEGER,PARAMETER :: NI=98, NJ=194,NK=1001,ngrid=5,maxout=2729032, maxint= 2527740,int1= 2211840
+    INTEGER,PARAMETER :: NI=48, NJ=73,NK=32,ngrid=5,maxout=2729032, maxint= 2527740,int1= 2211840
     !--- SIZE OF HEAT FLUX INPUT ARRAY
     nq = 1897,
