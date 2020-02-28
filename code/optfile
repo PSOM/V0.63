@@ -14,7 +14,7 @@
 # .
 # fcomp is the compiler used.
 # Example: fcomp="ifort", "gfortran" or "pgf95" will work. "xlf90" will unfortunately not work yet.
-fcomp=ifort
+fcomp=gfortran
 
 # .
 # define_netcdf tells whether the netcdf output will be used: define_netcdf=T : netcdf will be used, define_netcdf=F : netcdf will not be used.
@@ -26,7 +26,7 @@ define_netcdf=T
 define_gotm=T
 
 # define_parallel=T|F compiles PSOM with openmp|non-openmp flags.
-define_parallel=T
+define_parallel=F
 # (note: only available with ifort)
 
 # define_debug=T|F compiles PSOM with|without debugging options.
@@ -41,24 +41,24 @@ define_debug=F
 # .
 # dirc is the directory where 2012_psom has been installed.
 # Example: dirc="/Users/jstudent/ocean_dynamics/2012_psom" 
-dirc=/Users/mclaret/Dropbox/V0.63def
+dirc=/usr/tmp/pypsom
 
 # netcdf_dir_lib, _dir_inc and _lnk_flag tell where the netcdf libraries may be found, not used if define_netcdf=F
-netcdf_dir_lib=-L/usr/local/lib 
-netcdf_dir_inc=-I/usr/local/include
+netcdf_dir_lib=-L/usr/lib 
+netcdf_dir_inc=-I/usr/include
 
 #nelnk_flag=-lnetcdff -lnetcdf
-netcdf_lnk_flag=-lnetcdff -lnetcdf -lnetcdf
+netcdf_lnk_flag=-lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf
 
 # gotm_dir_lib and _dir_inc tell where the gotm libraries may be found, not used if define_gotm=F
 # (note: the libraries are compiler dependent)
 
-gotm_dir_lib=-L/Users/mclaret/PSOM/gotm-4.0.0/lib/IFORT/ -lturbulence_prod -lutil_prod -lmeanflow_prod
-gotm_dir_inc= -I/Users/mclaret/PSOM/gotm-4.0.0/modules/IFORT
-#gotm_dir_lib=-L/Users/mariona/PSOM/gotm-4.0.0/lib/GFORTRAN/ -lturbulence_prod -lutil_prod -lmeanflow_prod
-#gotm_dir_inc=-I/Users/mariona/PSOM/gotm-4.0.0/modules/GFORTRAN
-#gotm_dir_lib=-L/Users/mclaret/PSOM/gotm_stable/lib/IFORT/ -lturbulence_prod -lutil_prod -lmeanflow_prod
-#gotm_dir_inc= -I/Users/mclaret/PSOM/gotm_stable/modules/IFORT
+#gotm_dir_lib=-L/Users/mclaret/PSOM/gotm-4.0.0/lib/IFORT/ -lturbulence_prod -lutil_prod -lmeanflow_prod
+#gotm_dir_inc= -I/Users/mclaret/PSOM/gotm-4.0.0/modules/IFORT
+## DON'T change this since the dir of gotm is based on the container and will never change
+gotm_dir_lib=-L/root/local/gotm/gfortran/lib -lturbulence -lutil -lfield_manager -lyaml
+gotm_dir_inc=-I/root/local/gotm/gfortran/include
+
 
 
 # .

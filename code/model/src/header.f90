@@ -50,7 +50,7 @@ MODULE header
   INTEGER :: nsteps                                           !@ number of time steps, in namelist
 
   REAL(kind=rc_kind) ::  dtf                                  !@ dtf: nondimensional time step
-  REAL(kind=rc_kind) ::  dtime_dim                            !@ dtf:    dimensional time step (in sec), in namelist
+  REAL(kind=rc_kind) ::  dtime_dim                            !@ dtime_dim:    dimensional time step (in sec), in namelist
   REAL(kind=rc_kind) ::  dtime                                !@ dtime: time step (obsolete)
                                                             
   REAL(kind=rc_kind) ::  time_nondim,time_seconds             !@ incremental time (clock)
@@ -158,9 +158,9 @@ MODULE header
                                                                          
                                                                          
  !-------------------------------------------------------------------
- !-- settings of the output                                              
+ !-- settings of the in/output                                              
  !--------------------------                                             
-                                                                         
+  CHARACTER(LEN=151) :: dirin                                                                
   CHARACTER(LEN=151) :: dirout                              !@ dirout: directory where the output will go, in namelist
                                                            
   INTEGER :: out1d_int, out2d_int, out3d_int                !@ outXd_int: frequency of output in X dimensions ( X=1, 2, 3 ),

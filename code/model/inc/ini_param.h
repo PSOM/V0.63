@@ -13,7 +13,7 @@
                    dzbot_dim,&
 #endif
                    total_depth,use_Shchepetkin,Kx,Ky,RR,&
-                   pickup_int,pickup_step,out1d_int,out2d_int,out3d_int,dirout
+                   pickup_int,pickup_step,out1d_int,out2d_int,out3d_int,dirout,dirin
 
 #ifdef allow_particle
   NAMELIST /traj/ ini_particle_time,parti_file_num,parti_outfreq,NPR,pcx,pcy,pcz,pcr

@@ -90,8 +90,12 @@ if [ "$fcomp" = "ifort" ]; then
 
   if [ "$dparallel" = "T" ]; then
     # OpenMP flags
-    fflags_o=" -fpp -real-size 64 -Wl,-stack_size,0x40000000 -openmp -stand f03 -O3 -u"
-    fflags_e=" -fpp -real-size 64 -Wl,-stack_size,0x40000000 -openmp -stand f03 -O3 -u"
+
+    fflags_o=" -fpp -real-size 64  -mcmodel=large -openmp -stand f03 -O3 -u"
+    fflags_e=" -fpp -real-size 64  -mcmodel=large -openmp -stand f03 -O3 -u"
+
+    #fflags_o=" -fpp -real-size 64 -Wl,-stack_size,0x40000000 -openmp -stand f03 -O3 -u"
+    #fflags_e=" -fpp -real-size 64 -Wl,-stack_size,0x40000000 -openmp -stand f03 -O3 -u"
   elif [ "$ddebug" = "T" ]; then
     #debug mode:
     fflags_o=" -fpp -real-size 64 -stand f03 -g -traceback -check all -ftrapuv -nozero  -fp-stack-check -u -gen-interfaces -warn all -check bounds"
@@ -100,8 +104,11 @@ if [ "$fcomp" = "ifort" ]; then
     #fflags_o=" -fpp -real-size 64 -O3 -u"
     #fflags_e=" -fpp -real-size 64 -O3 -u"
 
-    fflags_o="-fpp -real-size 64 -Wl,-stack_size,0x40000000 -u"
-    fflags_e="-fpp -real-size 64 -Wl,-stack_size,0x40000000 -u" 
+    fflags_o=" -fpp -real-size 64  -mcmodel=large -stand f03 -O2 -u"
+    fflags_e=" -fpp -real-size 64  -mcmodel=large -stand f03 -O2 -u"
+
+    #fflags_o="-fpp -real-size 64 -Wl,-stack_size,0x40000000 -u"
+    #fflags_e="-fpp -real-size 64 -Wl,-stack_size,0x40000000 -u" 
 
     #fflags_o=" -fpp -real-size 64 -u"
     #fflags_e=" -fpp -real-size 64 -u"

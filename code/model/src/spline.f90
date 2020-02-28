@@ -1,4 +1,4 @@
-      subroutine spline (n, x, y, b, c, d) 
+subroutine spline (n, x, y, b, c, d) 
 !---------------------------------------------                          
      use header, only : rc_kind
       integer n 
